@@ -1,0 +1,6 @@
+# compiled
+*.pyc
+# virtualenv
+venv/
+# idea
+.idea/
