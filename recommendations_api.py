@@ -67,7 +67,7 @@ def run_server(_port):
 
 
 if __name__ == '__main__':
-    port = 5001
+    port = 5002
     if os.environ.get("PYTHON_ENV") == "prod":
         if not is_port_in_use(port):
             run_server(port)
