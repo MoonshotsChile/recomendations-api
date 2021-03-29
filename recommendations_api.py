@@ -1,15 +1,59 @@
 import os
-from flask import Flask
+from urllib.request import urlopen
+
 from flask_cors import CORS
 from waitress import serve
+from flask import Flask, jsonify
+from flask import Response
+from flask import stream_with_context
+from flask import request
+from urllib.parse import urlparse
+import json
 
 app = Flask(__name__)
 CORS(app)
 
+API_URL = "https://api.moonshots.cl/benefits"
 
-@app.route('/recommendations-api', methods=['GET'])
-def suggestions_api():
-    return {}
+
+@app.route('/benefits/', defaults={'id': ''}, methods=["GET"])
+@app.route('/benefits/<id>', methods=["GET"])
+def benefits(id):
+    query = urlparse(request.url).query
+    url = f'{API_URL}/benefits/{id}?{query}'
+    json_url = urlopen(url)
+    data = json.loads(json_url.read())
+    return jsonify(data)
+
+
+@app.route('/userdata/', defaults={'id': ''}, methods=["GET"])
+@app.route('/userdata/<id>', methods=["GET"])
+def userdata(id):
+    query = urlparse(request.url).query
+    url = f'{API_URL}/userdata/{id}?{query}'
+    json_url = urlopen(url)
+    data = json.loads(json_url.read())
+    return jsonify(data)
+
+
+@app.route('/missions/', defaults={'id': ''}, methods=["GET"])
+@app.route('/missions/<id>', methods=["GET"])
+def missions(id):
+    query = urlparse(request.url).query
+    url = f'{API_URL}/missions/{id}?{query}'
+    json_url = urlopen(url)
+    data = json.loads(json_url.read())
+    return jsonify(data)
+
+
+@app.route('/notifications/', defaults={'id': ''}, methods=["GET"])
+@app.route('/notifications/<id>', methods=["GET"])
+def missions(id):
+    query = urlparse(request.url).query
+    url = f'{API_URL}/missions/{id}?{query}'
+    json_url = urlopen(url)
+    data = json.loads(json_url.read())
+    return jsonify(data)
 
 
 def is_port_in_use(port):
