@@ -25,8 +25,8 @@ class Userdata:
         return data
 
     @staticmethod
-    def add(_request, _id):
-        url = f'{API_URL}/userdata/{_id}'
+    def add(_request):
+        url = f'{API_URL}/userdata'
         req = request.Request(url, method='POST', data=_request.data)
         req.add_header('Content-Type', 'application/json')
         json_url = urlopen(req)

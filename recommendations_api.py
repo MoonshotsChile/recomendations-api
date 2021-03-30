@@ -43,9 +43,9 @@ def userdata_patch(_id):
     return Userdata.patch(request, _id)
 
 
-@app.route('/benefits-v2/userdata/<_id>/', methods=["POST"])
-def userdata_add(_id):
-    return Userdata.add(request, _id)
+@app.route('/benefits-v2/userdata', methods=["POST"])
+def userdata_add():
+    return Userdata.add(request)
 
 
 @app.route('/benefits-v2/userdata/', defaults={'_id': ''}, methods=["DELETE"])
@@ -72,4 +72,4 @@ if __name__ == '__main__':
         else:
             print(f"port {port} is already in use, see ya ;)")
     else:
-        app.run(debug=True)
+        app.run(debug=True, port=port)
