@@ -22,7 +22,7 @@ class Userdata:
         req.add_header('Content-Type', 'application/json')
         json_url = urlopen(req)
         data = json.loads(json_url.read())
-        return data
+        return jsonify(data)
 
     @staticmethod
     def add(_request):
