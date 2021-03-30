@@ -1,8 +1,10 @@
 import json
 from urllib import request
-from urllib.request import urlopen
 from urllib.parse import urlparse
+from urllib.request import urlopen
+
 from flask import jsonify
+
 from constants import API_URL
 
 
