@@ -13,8 +13,8 @@ CORS(app)
 API_URL = "https://api.moonshots.cl/benefits"
 
 
-@app.route('/benefits/', defaults={'id': ''}, methods=["GET"])
-@app.route('/benefits/<id>', methods=["GET"])
+@app.route('/benefits-v2/benefits/', defaults={'id': ''}, methods=["GET"])
+@app.route('/benefits-v2/benefits/<id>', methods=["GET"])
 def benefits(id):
     query = urlparse(request.url).query
     url = f'{API_URL}/benefits/{id}?{query}'
@@ -23,8 +23,8 @@ def benefits(id):
     return jsonify(data)
 
 
-@app.route('/userdata/', defaults={'id': ''}, methods=["GET"])
-@app.route('/userdata/<id>', methods=["GET"])
+@app.route('/benefits-v2/userdata/', defaults={'id': ''}, methods=["GET"])
+@app.route('/benefits-v2/userdata/<id>', methods=["GET"])
 def userdata(id):
     query = urlparse(request.url).query
     url = f'{API_URL}/userdata/{id}?{query}'
@@ -33,8 +33,8 @@ def userdata(id):
     return jsonify(data)
 
 
-@app.route('/missions/', defaults={'id': ''}, methods=["GET"])
-@app.route('/missions/<id>', methods=["GET"])
+@app.route('/benefits-v2/missions/', defaults={'id': ''}, methods=["GET"])
+@app.route('/benefits-v2/missions/<id>', methods=["GET"])
 def missions(id):
     query = urlparse(request.url).query
     url = f'{API_URL}/missions/{id}?{query}'
@@ -43,8 +43,8 @@ def missions(id):
     return jsonify(data)
 
 
-@app.route('/notifications/', defaults={'id': ''}, methods=["GET"])
-@app.route('/notifications/<id>', methods=["GET"])
+@app.route('/benefits-v2/notifications/', defaults={'id': ''}, methods=["GET"])
+@app.route('/benefits-v2/notifications/<id>', methods=["GET"])
 def notifications(id):
     query = urlparse(request.url).query
     url = f'{API_URL}/missions/{id}?{query}'
