@@ -1,13 +1,10 @@
 import os
 from urllib.request import urlopen
+from urllib.parse import urlparse
 
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from waitress import serve
-from flask import Flask, jsonify
-from flask import Response
-from flask import stream_with_context
-from flask import request
-from urllib.parse import urlparse
 import json
 
 app = Flask(__name__)
@@ -48,7 +45,7 @@ def missions(id):
 
 @app.route('/notifications/', defaults={'id': ''}, methods=["GET"])
 @app.route('/notifications/<id>', methods=["GET"])
-def missions(id):
+def notifications(id):
     query = urlparse(request.url).query
     url = f'{API_URL}/missions/{id}?{query}'
     json_url = urlopen(url)
