@@ -7,56 +7,45 @@ from flask_cors import CORS
 from waitress import serve
 import json
 
+from api.benefits import Benefits
+from api.missions import Missions
+from api.notifications import Notifications
+from api.userdata import Userdata
+
 app = Flask(__name__)
 CORS(app)
 
 API_URL = "https://api.moonshots.cl/benefits"
 
 
-@app.route('/benefits-v2/benefits/', defaults={'id': ''}, methods=["GET"])
-@app.route('/benefits-v2/benefits/<id>', methods=["GET"])
-def benefits(id):
-    query = urlparse(request.url).query
-    url = f'{API_URL}/benefits/{id}?{query}'
-    json_url = urlopen(url)
-    data = json.loads(json_url.read())
-    return jsonify(data)
+@app.route('/benefits-v2/benefits/', defaults={'_id': ''}, methods=["GET"])
+@app.route('/benefits-v2/benefits/<_id>', methods=["GET"])
+def benefits(_id):
+    return Benefits.get(request, _id)
 
 
-@app.route('/benefits-v2/userdata/', defaults={'id': ''}, methods=["GET"])
-@app.route('/benefits-v2/userdata/<id>', methods=["GET"])
-def userdata(id):
-    query = urlparse(request.url).query
-    url = f'{API_URL}/userdata/{id}?{query}'
-    json_url = urlopen(url)
-    data = json.loads(json_url.read())
-    return jsonify(data)
+@app.route('/benefits-v2/userdata/', defaults={'_id': ''}, methods=["GET"])
+@app.route('/benefits-v2/userdata/<_id>', methods=["GET"])
+def userdata(_id):
+    return Userdata.get(request, _id)
 
 
-@app.route('/benefits-v2/missions/', defaults={'id': ''}, methods=["GET"])
-@app.route('/benefits-v2/missions/<id>', methods=["GET"])
-def missions(id):
-    query = urlparse(request.url).query
-    url = f'{API_URL}/missions/{id}?{query}'
-    json_url = urlopen(url)
-    data = json.loads(json_url.read())
-    return jsonify(data)
+@app.route('/benefits-v2/missions/', defaults={'_id': ''}, methods=["GET"])
+@app.route('/benefits-v2/missions/<_id>', methods=["GET"])
+def missions(_id):
+    return Missions.get(request, _id)
 
 
-@app.route('/benefits-v2/notifications/', defaults={'id': ''}, methods=["GET"])
-@app.route('/benefits-v2/notifications/<id>', methods=["GET"])
-def notifications(id):
-    query = urlparse(request.url).query
-    url = f'{API_URL}/missions/{id}?{query}'
-    json_url = urlopen(url)
-    data = json.loads(json_url.read())
-    return jsonify(data)
+@app.route('/benefits-v2/notifications/', defaults={'_id': ''}, methods=["GET"])
+@app.route('/benefits-v2/notifications/<_id>', methods=["GET"])
+def notifications(_id):
+    return Notifications.get(request, _id)
 
 
-def is_port_in_use(port):
+def is_port_in_use(_port):
     import socket
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        return s.connect_ex(('localhost', port)) == 0
+        return s.connect_ex(('localhost', _port)) == 0
 
 
 def run_server(_port):
